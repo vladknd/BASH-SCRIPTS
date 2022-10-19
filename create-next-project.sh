@@ -3,6 +3,7 @@ cd /Volumes/LIB/IT/CODE
 mkdir $1
 cd /Volumes/LIB/IT/CODE/$1
 npm init -y 
+
 npm i react react-dom next styled-components dotenv
 npm i -D typescript @types/node @types/react @types/styled-components
 ./node_modules/.bin/tsc --init  
@@ -21,7 +22,8 @@ cd ../../
 
 mkdir components
 
-cp /Volumes/LIB/IT/CODE/newComponent.sh ./
+cp /Volumes/LIB/IT/CODE/BASH-SCRIPTS/newComponent.sh ./
+cp /Volumes/LIB/IT/CODE/BASH-SCRIPTS/gitInit.sh ./
 
 mkdir pages && cd pages 
 
@@ -100,9 +102,11 @@ echo "const nextConfig = {
 module.exports = nextConfig" > next.config.js
 
 /usr/local/bin/jq '. + {"scripts": {"dev": "next dev", "start": "next start", "build": "next build",
-"component": "./newComponent.sh $npm_config_name"}}' package.json > temp.json && mv temp.json package.json
+"component": "./newComponent.sh $npm_config_name", "git": "./gitInit.sh"}}' package.json > temp.json && mv temp.json package.json
 
 open -a 'Visual Studio Code' "/Volumes/LIB/IT/CODE/$1"
 open -a 'iTerm' "/Volumes/LIB/IT/CODE/$1"
 open -a 'Google Chrome' "http://localhost:3000/" 
+
+/Volumes/LIB/IT/CODE/BASH-SCRIPTS/newTermTab.py $1 
 return $1
